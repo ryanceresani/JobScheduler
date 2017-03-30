@@ -1,0 +1,21 @@
+Processor Scheduling Notes
+
+CLASSES:
+* Job
+* Processor
+* phantom Job Sender (to send jobs to processor at appropriate times and simulate environment)
+
+DATA Structre Requirements:
+* Job Queue ordered by alorithm need (Job Length, Job Time Remaining, Time Quantum?)
+	- needs to be sorted so
+
+1. Keep track of timing
+	-ticks?
+	
+2. Request queue that contains all of the jobs listed in table
+	- sends request to processor class at appropriate time for job
+
+3. processor determines based on algorithm what to do with jobs
+	- start working on or put into queue
+
+4. 
