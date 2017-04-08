@@ -15,13 +15,15 @@ public class PCB {
 		setStatus("HOLD");
 	}
 
-	public void tickJob(int systemTime){
+	public boolean tickJob(int systemTime){
 		timer.decrementTimeRemaining();
-		if(getTimeRemaining() == 0){
+		if(getTimeRemaining() <= 0){
 			setStatus("FINISHED");
 			timer.setEndTime(systemTime);
 			timer.calculateTimes();
+			return true;
 		}
+		return false;
 	}
 
 	public int getTurnAround() { return timer.turnAround;	}
@@ -44,16 +46,16 @@ public class PCB {
 		@Override
 		public int compare(PCB o1, PCB o2) {
 			if(algo.equals(Algo.SJN)){
-				return Integer.valueOf(o1.getJobTime()).compareTo(Integer.valueOf(o2.getJobTime()));
+				return Integer.compare(o1.getJobTime(), o2.getJobTime());
 			}
 			else if(algo.equals(Algo.SRT)){
-				return Integer.valueOf(o1.getTimeRemaining()).compareTo(Integer.valueOf(o2.getTimeRemaining()));
+				return Integer.compare(o1.getTimeRemaining(), o2.getTimeRemaining());
 			}
 			else if(algo.equals(Algo.FCFS)){
-				return Integer.valueOf(o1.getArrivalTime()).compareTo(Integer.valueOf(o2.getArrivalTime()));
+				return Integer.compare(o1.getArrivalTime(), o2.getArrivalTime());
 			}
 			else {
-				return Integer.valueOf(o1.getLastInterrupt()).compareTo(Integer.valueOf(o2.getLastInterrupt()));
+				return Integer.compare(o1.getLastInterrupt(), o2.getLastInterrupt());
 			}
 		}
 	}
@@ -72,7 +74,7 @@ public class PCB {
 			this.arrivalTime = arrivalTime;
 			this.cpuCycles = cpuCycles;
 			this.timeRemaining = this.cpuCycles;
-			this.lastInterrupt = 0;
+			this.lastInterrupt = arrivalTime;
 		}
 
 		public void setEndTime(int systemTime) {
