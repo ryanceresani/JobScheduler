@@ -6,8 +6,8 @@ CLASSES:
 * phantom Job Sender (to send jobs to processor at appropriate times and simulate environment)
 
 DATA Structre Requirements:
-* Job Queue ordered by alorithm need (Job Length, Job Time Remaining, Time Quantum?)
-	- needs to be sorted so
+* Job Queue ordered by alorithm need (Job Length, Job Time Remaining)
+	- needs to be sorted so something like tree map or priority queue
 
 1. Keep track of timing
 	-ticks?

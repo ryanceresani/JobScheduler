@@ -37,6 +37,10 @@ public class PCB {
 	public void setStatus(String status) { this.status = status; }
 	public void setInterrupt(int systemTime) { this.timer.lastInterrupt = systemTime; }
 
+	@Override
+	public String toString() {
+		return this.jobName + " " + this.getArrivalTime() + " " + this.getJobTime() + " TR:" +this.getTimeRemaining();
+	}
 	
 	static class PCBComparator implements Comparator<PCB>{
 		private Algo algo;
@@ -58,6 +62,7 @@ public class PCB {
 				return Integer.compare(o1.getLastInterrupt(), o2.getLastInterrupt());
 			}
 		}
+		
 	}
 
 	class Timer {
