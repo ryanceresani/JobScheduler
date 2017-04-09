@@ -42,6 +42,14 @@ public class PCB {
 		return this.jobName + " " + this.getArrivalTime() + " " + this.getJobTime() + " TR:" +this.getTimeRemaining();
 	}
 	
+
+	public void printStats() {
+		String leftAlignFormat = "| %-9s | %-12s | %-10s | %-8s | %-15s | %-12s | %n";
+		System.out.format(leftAlignFormat, jobName, timer.arrivalTime, timer.cpuCycles, timer.endTime, timer.turnAround, timer.waitingTime);
+		System.out.format("+-----------+--------------+------------+----------+-----------------+--------------+%n");
+		
+	}
+	
 	static class PCBComparator implements Comparator<PCB>{
 		private Algo algo;
 		public PCBComparator(Algo algo){
@@ -95,6 +103,7 @@ public class PCB {
 			waitingTime = turnAround - cpuCycles;
 		}
 	}
+
 
 }
 
