@@ -15,11 +15,11 @@ import scheduler.Scheduler.Algo;
  * Tester class to provide job requests to a scheduler class.
  * Generates a job request queue that is sent to the Scheduler at the appropriate arrival times for that job
  */
-public class _jobSender {
+public class JobSender {
 	PriorityQueue<PCB> jobRequest;
 
 	public static void main(String[] args) throws IOException{
-		_jobSender js = new _jobSender();
+		JobSender js = new JobSender();
 		int nextArrival = js.jobRequest.peek().getArrivalTime();
 		Scheduler.schedulers.add(new Scheduler(Algo.FCFS));
 		Scheduler.schedulers.add(new Scheduler(Algo.SJN));
@@ -51,8 +51,7 @@ public class _jobSender {
 		printResults();
 	}
 
-
-	public _jobSender() throws IOException{
+	public JobSender() throws IOException{
 		Comparator<PCB> comp = new PCBComparator(Algo.FCFS);
 		jobRequest = new PriorityQueue<PCB>(comp);
 		populateRequests();
