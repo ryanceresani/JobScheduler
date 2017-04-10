@@ -20,7 +20,6 @@ public class Scheduler {
 	static int systemTime = 0;
 	static ArrayList<Scheduler> schedulers = new ArrayList<>();
 
-
 	boolean idle;
 	PriorityQueue<PCB> jobQueue;
 	HashMap<String, PCB> finishedJobs;
@@ -28,7 +27,6 @@ public class Scheduler {
 	Algo algo;
 	Comparator<PCB> comparator;
 	int currentSlice = 0;
-
 
 	/**
 	 * Scheduler Constructor
@@ -42,7 +40,6 @@ public class Scheduler {
 		finishedJobs = new HashMap<>();
 		idle = true;
 	}
-
 
 	/**
 	 * Accepts a job request from an outside source and handles appropriately
@@ -59,7 +56,6 @@ public class Scheduler {
 		}
 		idle = false;
 	}
-
 
 	/**
 	 * Internally advances processor one tick. Checks if a job needs to be interrupted based on algorithm
@@ -104,10 +100,8 @@ public class Scheduler {
 			if(algo.equals(Algo.RR) && currentSlice >= TIME_QUANTUM){
 				return true;
 			}
-			else{
-				if(comparator.compare(currentJob, jobQueue.peek()) > 0){
-					return true;
-				}
+			else if(comparator.compare(currentJob, jobQueue.peek()) > 0){
+				return true;
 			}
 		}
 		return false;
@@ -132,13 +126,13 @@ public class Scheduler {
 		System.out.format(leftAlignFormat, algo.toString(), avgTurnAround, avgWaitingTime);
 		System.out.format("+------------+----------------+-------------+%n");
 	}
-	
+
 	public void printIndividualStats(){
 		Iterator<Entry<String, PCB>> it = finishedJobs.entrySet().iterator();
 		System.out.println();
 		System.out.println("+ " + algo.toString() +" Finished PCB Stats");
 		System.out.format("+-----------+--------------+------------+----------+-----------------+--------------+%n");
-		System.out.format("| Job Name  | Arrival Time | CPU Cylces | End Time | Turnaround Time | Waiting Time |%n");
+		System.out.format("| Job Name  | Arrival Time | CPU Cycles | End Time | Turnaround Time | Waiting Time |%n");
 		System.out.format("+-----------+--------------+------------+----------+-----------------+--------------+%n");
 		while(it.hasNext()){
 			PCB next = it.next().getValue();
@@ -180,5 +174,8 @@ public class Scheduler {
 		return true;
 	}
 
+	public static void addScheduler(Algo algo) {
+		schedulers.add(new Scheduler(algo));
+	}
 }
 

@@ -21,10 +21,10 @@ public class JobSender {
 	public static void main(String[] args) throws IOException{
 		JobSender js = new JobSender();
 		int nextArrival = js.jobRequest.peek().getArrivalTime();
-		Scheduler.schedulers.add(new Scheduler(Algo.FCFS));
-		Scheduler.schedulers.add(new Scheduler(Algo.SJN));
-		Scheduler.schedulers.add(new Scheduler(Algo.SRT));
-		Scheduler.schedulers.add(new Scheduler(Algo.RR));
+		Scheduler.addScheduler(Algo.FCFS);
+		Scheduler.addScheduler(Algo.SJN);
+		Scheduler.addScheduler(Algo.SRT);
+		Scheduler.addScheduler(Algo.RR);
 		
 		while(!js.jobRequest.isEmpty() || !Scheduler.allIdle()){
 			try {
@@ -33,14 +33,9 @@ public class JobSender {
 				nextArrival = -1;
 			}
 			if(Scheduler.systemTime == nextArrival){
-				PCB newJob = js.jobRequest.poll();
-				//Copy details of the newJob so it can be tested in 4 schedulers simultaneously
-				int newJobArrival = newJob.getArrivalTime();
-				int newJobCPU = newJob.getJobTime();
-				String newJobName = newJob.getJobName();
-				
+				PCB newJob = js.jobRequest.poll();				
 				for (Scheduler scheduler : Scheduler.schedulers) {
-					scheduler.requestJob(new PCB(newJobName, newJobArrival, newJobCPU));
+					scheduler.requestJob(new PCB(newJob));
 				}
 			}
 			for (Scheduler scheduler : Scheduler.schedulers) {

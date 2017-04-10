@@ -14,6 +14,16 @@ public class PCB {
 		timer = new Timer(arrivalTime, cpuCycles);
 		setStatus("HOLD");
 	}
+	
+	/**
+	 * For cloning a copy of a PCB
+	 * @param PCB clone
+	 */
+	public PCB(PCB clone){
+		this.jobName = clone.jobName;
+		this.timer = new Timer(clone.getArrivalTime(), clone.getJobTime());
+		setStatus(clone.getStatus());
+	}
 
 	public boolean tickJob(int systemTime){
 		timer.decrementTimeRemaining();
