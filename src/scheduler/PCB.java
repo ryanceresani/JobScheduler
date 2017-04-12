@@ -9,6 +9,12 @@ public class PCB {
 	private String status;
 	private Timer timer;
 
+	/**
+	 * PCB Constructor
+	 * @param jobName
+	 * @param arrivalTime
+	 * @param cpuCycles
+	 */
 	public PCB(String jobName, int arrivalTime, int cpuCycles){
 		this.jobName = jobName;
 		timer = new Timer(arrivalTime, cpuCycles);
@@ -25,6 +31,11 @@ public class PCB {
 		setStatus(clone.getStatus());
 	}
 
+	/**
+	 * Ticks the job by one time increment and checks for if it finishes
+	 * @param systemTime
+	 * @return TRUE if the job finishes after this tick, FALSE if it has time remaining
+	 */
 	public boolean tickJob(int systemTime){
 		timer.decrementTimeRemaining();
 		if(getTimeRemaining() <= 0){
@@ -60,6 +71,10 @@ public class PCB {
 		
 	}
 	
+	/**
+	 * @author ceresanr
+	 * Custom comparator to enable PCB to exist in a priority queue
+	 */
 	static class PCBComparator implements Comparator<PCB>{
 		private Algo algo;
 		public PCBComparator(Algo algo){
@@ -83,6 +98,10 @@ public class PCB {
 		
 	}
 
+	/**
+	 * @author ceresanr
+	 * Internal accounting of all the timing for each PCB
+	 */
 	class Timer {
 
 		protected int lastInterrupt;

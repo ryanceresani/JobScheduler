@@ -26,6 +26,8 @@ public class JobSender {
 		Scheduler.addScheduler(Algo.SRT);
 		Scheduler.addScheduler(Algo.RR);
 		
+		//Continue while there are more jobs to be requested or a scheduler is 
+		//still working on a job
 		while(!js.jobRequest.isEmpty() || !Scheduler.allIdle()){
 			try {
 				nextArrival = js.jobRequest.peek().getArrivalTime();

@@ -111,6 +111,10 @@ public class Scheduler {
 		return idle;
 	}
 
+	/**
+	 * Calculates and prints the stats for every scheduler that exists
+	 * 
+	 */
 	public void printAverageStats(){
 		double avgTurnAround = 0;
 		double avgWaitingTime = 0; 
@@ -127,6 +131,9 @@ public class Scheduler {
 		System.out.format("+------------+----------------+-------------+%n");
 	}
 
+	/**
+	 * Prints out the stats for an individual schedulers finishes jobs
+	 */
 	public void printIndividualStats(){
 		Iterator<Entry<String, PCB>> it = finishedJobs.entrySet().iterator();
 		System.out.println();
@@ -165,6 +172,10 @@ public class Scheduler {
 	}
 
 
+	/**
+	 * Check if all schedulers are sitting idle.
+	 * @return TRUE if all the schedulers are sitting idle
+	 */
 	public static boolean allIdle() {
 		for (Scheduler scheduler : schedulers) {
 			if(!scheduler.isIdle()){
@@ -174,6 +185,10 @@ public class Scheduler {
 		return true;
 	}
 
+	/**
+	 * Adds a scheduler to the static list of instantiated schedulers
+	 * @param an Algo enum that defines the algorithm used for scheduling
+	 */
 	public static void addScheduler(Algo algo) {
 		schedulers.add(new Scheduler(algo));
 	}
